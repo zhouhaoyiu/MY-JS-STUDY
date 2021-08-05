@@ -59,11 +59,11 @@
         }
       }
 
-      BinarySearchTree.prototype.midOrderTraversal = function (handler){
-        this.midOrderTraversalNode(this.root,handler)
+      BinarySearchTree.prototype.midOrderTraversal = function (handler) {
+        this.midOrderTraversalNode(this.root, handler)
       }
 
-      BinarySearchTree.prototype.midOrderTraversalNode = function(node,handler){
+      BinarySearchTree.prototype.midOrderTraversalNode = function (node, handler) {
 
       }
     }
@@ -75,6 +75,18 @@
     bst.insert(7)
     bst.insert(15)
     console.log(bst)
+
+    // let a = new Promise((resolve, reject) => {
+    //   let num = Math.random() * 10
+    //   if (num > 3) {
+    //     resolve(num)
+    //   }
+    //   else {
+    //     reject(num)
+    //   }
+    // })
+    // a.then(num => { console.log(num) }, num => { console.log('失败了' + num) })
+    // // .catch(err=>{})
   </script>
 </head>
 
