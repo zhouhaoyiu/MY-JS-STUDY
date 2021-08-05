@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // console.log(2%2)
+    let search = function (nums, target) {
+      let size = nums.length
+      // console.log(size);
+
+      let left = []
+      let right = []
+      let center = null
+      console.log(size);
+      if (size % 2 == 0) {
+        left.push(...(nums.splice(0, parseInt(size / 2))))
+        right.push(...nums)
+        console.log(left)
+        console.log(right)
+        if (left.length == 1 || right.length == 1) {
+
+          return -1
+        } else {
+          search(left)
+          search(right)
+        }
+
+
+      }
+      else {
+
+        center = nums[parseInt(size / 2)]
+        if (center == target) {
+          return parseInt(size / 2)
+        }
+        left.push(...(nums.splice(0, parseInt(size / 2))))
+        right.push(...(nums.splice(1, parseInt(size / 2))))
+
+        console.log(left)
+        console.log(right)
+
+        if (left.length == 1 || right.length == 1) {
+
+          return -1
+        } else {
+          search(left)
+          search(right)
+        }
+      }
+    }
+
+    console.log(search([-1, 0, 3, 5, 9, 10], 3))
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function Set() {
+      this.items = {}
+
+      Set.prototype.add = function (value) {
+        if (this.has(value)) {
+          return false
+        }
+        this.items[value] = value
+        return true
+      }
+
+      Set.prototype.has = function (value) {
+        return this.items.hasOwnProperty(value)
+      }
+
+      Set.prototype.remove = function (value) {
+        if (!this.has(value)) {
+          return false
+        }
+
+        delete this.items[value]
+        return true
+      }
+
+      Set.prototype.clear = function () {
+        this.items = {}
+      }
+
+      Set.prototype.size = function () {
+        return Object.keys(this.items).length
+      }
+
+      Set.prototype.values = function () {
+        return Object.keys(this.items)
+      }
+
+      Set.prototype.union = function (otherSet) {
+        var unionSet = new Set()
+
+        var values = this.values()
+
+        for (var i = 0; i < values.length; i++) {
+          unionSet.add(values[i])
+        }
+
+        values = otherSet.values()
+        for (var i = 0; i < values.length; i++) {
+          unionSet.add(values[i])
+        }
+
+        return unionSet
+      }
+
+      Set.prototype.intersection = function (otherSet) {
+        var intersectionSet = new Set()
+
+        var values = this.values()
+
+        for (var i = 0; i < values.length; i++) {
+          var item = values[i]
+          if (otherSet.has(item)) {
+            intersectionSet.add(item)
+          }
+        }
+        return intersectionSet
+      }
+
+      Set.prototype.diff = function (otherSet) {
+        var diff = new Set()
+        var values = this.values()
+        for (var i = 0; i < values.length; i++) {
+          var item = values[i]
+          if (!otherSet.has(item)) {
+            diff.add(item)
+          }
+        }
+        return diff
+      }
+
+      Set.prototype.subset = function (otherSet) {
+        var values = this.values()
+        for (var i = 0; i < values.length; i++) {
+          var item = values[i]
+          if (!otherSet.has(item)) {
+            return false
+          }
+        }
+        return true
+      }
+    }
+    var setA = new Set()
+    setA.add('as')
+    setA.add('sadsds')
+
+    var setB = new Set()
+    setB.add('vvds')
+    setB.add('as')
+
+
+    console.log(setA.subset(setB))
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

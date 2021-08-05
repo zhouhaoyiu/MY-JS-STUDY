@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+
+    function HashTable() {
+      this.storage = []
+      this.count = 0
+      this.limit = 7
+      HashTable.prototype.hashFunc = function (str, size) {
+        var hashCode = 0
+
+        for (var i = 0; i < str.length; i++) {
+          hashCode = 37 * hashCode + str.charCodeAt(i)
+        }
+
+        var index = hashCode % size
+        return index
+      }
+
+      HashTable.prototype.put = function (K, V) {
+        var index = this.hashFunc(K, this.limit)
+        var bucket = this.storage[index]
+
+        if (bucket == null) {
+          bucket = []
+          this.storage[index] = bucket
+
+        }
+
+        for (var i = 0; i < bucket.length; i++) {
+          var tuple = bucket[i]
+          if (tuple[0] == K) {
+            tuple[1] = V
+            return
+          }
+          console.log(K, V);
+        }
+        bucket.push([K, V])
+        this.count += 1
+
+        if (this.count > this.limit * 0.75) {
+          var newSize = this.limit * 2
+          var newPrime = this.getPrime(newSize)
+          this.resize(newSize)
+        }
+      }
+      HashTable.prototype.get = function (K) {
+        var index = this.hashFunc(K, this.limit)
+
+        var bucket = this.storage[index]
+
+        if (bucket == null) {
+          return null
+        }
+        for (var i = 0; i < bucket.length; i++) {
+          var tuple = bucket[i]
+          if (tuple[0] == K) {
+            return tuple[1]
+          }
+        }
+        return null
+      }
+      HashTable.prototype.remove = function (K) {
+        var index = this.hashFunc(K, this.limit)
+        var bucket = this.storage[index]
+
+        if (bucket == null) {
+          return null
+        }
+        for (var i = 0; i < bucket.length; i++) {
+          var tuple = bucket[i]
+          if (tuple[0] == K) {
+            bucket.splice(i, 1)
+            this.count--
+            return tuple[1]
+
+            if (this.limit > 7 && this.count < this.limit * 0.25) {
+              var newSize = Math.floor(this.limit / 2)
+              var newPrime = this.getPrime(newSize)
+              this.resize(Math.floor(this.limit / 2))
+            }
+          }
+        }
+        return null
+      }
+
+      HashTable.prototype.isEmpty = function () {
+        return this.count == 0
+      }
+
+      HashTable.prototype.size = function () {
+        return this.count
+      }
+
+      HashTable.prototype.resize = function (newLimit) {
+        var oldStorage = this.storage
+
+        this.storage = []
+        this.count = 0
+        this.limit = newLimit
+
+        for (var i = 0; i < oldStorage.length; i++) {
+          var bucket = oldStorage[i]
+
+          if (bucket == null) {
+            continue
+          }
+
+          for (var j = 0; j < bucket.length; j++) {
+            var tuple = bucket[j]
+            this.put(tuple[0], tuple[1])
+          }
+        }
+      }
+
+      HashTable.prototype.isPrime = function (num) {
+        var temp = parseInt(Math.sqrt(num))
+
+        for (var i = 2; i <= temp; i++) {
+          if (num % i == 0) {
+            return false
+          }
+        }
+        return true
+      }
+
+      HashTable.prototype.getPrime = function (num) {
+        while (!this.isPrime(num)) {
+          num++
+        }
+        return num
+      }
+    }
+
+    // let ht = new HashTable()
+
+    // ht.put('abc', '123')
+    // ht.put('cba', '456')
+    // console.log(ht.get('abc'))
+
+
+    // function dep(arr) {
+    //   var sum = 0
+    //   getDepth(arr)
+    //   function getDepth(arr) {
+    //     for (let i in arr) {
+    //       if (arr[i] instanceof Array) {
+    //         // console.log(arr[i]);
+    //         sum += 1
+    //         for (let j in arr[i]) {
+    //           console.log(arr[i]);
+    //           getDepth(arr[i][j])
+
+    //         }
+    //       }
+    //     }
+    //   }
+    //   return sum
+    // }
+
+    console.log(typeof(HashTable()))
+
+
+    a = [1, 2, [3, [1, [0]]]]
+    b = []
+    c = [[[[]]]]
+    d = [0, [2], [2, [3]]]
+    function getDeepth(array) {
+
+      function sum(arr, flag) {
+        return arr.reduce(function (total, item) {
+          
+          var totalDeepth;
+          if (Array.isArray(item)) {
+            totalDeepth = sum(item, flag + 1);
+          }
+          
+          return totalDeepth > total ? totalDeepth : total;
+        }, flag)
+      }
+
+      return sum(array, 0);
+    }
+    console.log(getDeepth(a))
+    console.log(getDeepth(b))
+    console.log(getDeepth(c))
+    console.log(getDeepth(d))
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

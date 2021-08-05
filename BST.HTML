@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function BinarySearchTree() {
+      function Node(key) {
+        this.key = key
+        this.left = null
+        this.right = null
+      }
+
+      this.root = null
+
+      BinarySearchTree.prototype.insert = function (key) {
+        var newNode = new Node(key)
+
+        if (this.root == null) {
+          console.log(456)
+          this.root = newNode
+        } else {
+          this.insertNode(this.root, newNode)
+        }
+      }
+
+      BinarySearchTree.prototype.insertNode = function (node, newNode) {
+        if (newNode.key < node.key) {
+          if (node.left == null) {
+            node.left = newNode
+          }
+          else {
+            this.insertNode(node.left, newNode)
+          }
+        }
+        else {
+          if (node.right == null) {
+            node.right = newNode
+          }
+          else {
+            this.insertNode(node.right, newNode)
+          }
+
+        }
+      }
+
+      BinarySearchTree.prototype.preOrderTraversal = function (handler) {
+        this.preOrderTraversalNode(this.root, handler)
+      }
+
+      BinarySearchTree.prototype.preOrderTraversalNode = function (node, handler) {
+        if (node != null) {
+          handler(node.key)
+          this.preOrderTraversalNode(node.left, handler)
+          this.preOrderTraversalNode(node.right, handler)
+        }
+      }
+
+      BinarySearchTree.prototype.midOrderTraversal = function (handler){
+        this.midOrderTraversalNode(this.root,handler)
+      }
+
+      BinarySearchTree.prototype.midOrderTraversalNode = function(node,handler){
+
+      }
+    }
+    var bst = new BinarySearchTree()
+
+
+    bst.insert(11)
+    bst.insert(3)
+    bst.insert(7)
+    bst.insert(15)
+    console.log(bst)
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

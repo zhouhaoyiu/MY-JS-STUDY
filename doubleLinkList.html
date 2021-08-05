@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<script>
+  function DoublyLinkedlist() {
+    //封装内部类：节点类
+    function Node(data) {
+      this.data = data
+      this.prev = null
+      this.next = null
+    }
+    //属性
+    this.head = null
+    this.tail = null
+    this.length = 0
+
+    DoublyLinkedlist.prototype.append = function (data) {
+      var newNode = new Node(data)
+
+      if (this.length == 0) {
+        this.head = newNode
+        this.tail = newNode
+      } else {
+        newNode.prev = this.tail
+        this.tail.next = newNode
+        this.tail = newNode
+      }
+      this.length += 1
+    }
+    //后向前遍历
+    DoublyLinkedlist.prototype.forwardString = function () {
+      var current = this.tail
+      var resultString = ''
+
+      while (current) {
+        resultString += current.data + ' '
+        current = current.prev
+      }
+      return resultString
+    }
+
+    //前向后遍历
+    DoublyLinkedlist.prototype.backwardString = function () {
+      var current = this.head
+      var resultString = ''
+
+      while (current) {
+        resultString += current.data + ' '
+        current = current.next
+      }
+
+      return resultString
+    }
+
+    DoublyLinkedlist.prototype.insert = function (position, data) {
+      if (position < 0 || position > this.length) {
+        return false
+      }
+
+      var newNode = new Node(data)
+      if (this.length === 0) {
+        this.head = newNode
+        this.tail = newNode
+      } else {
+        if (position === 0) {
+          this.head.prev = newNode
+          newNode.next = this.head
+          this.head = newNode
+        } else if (position === this.length) {
+          newNode.prev = this.tail
+          this.tail.next = newNode
+          this.tail = newNode
+        } else {
+          var current = this.head
+          var index = 0
+
+          while (index++ < position) {
+            current = current.next
+          }
+          newNode.next = current
+          newNode.prev = current.prev
+          current.prev.next = newNode
+          current.prev = newNode
+        }
+      }
+      this.length += 1
+
+      return true
+    }
+
+    DoublyLinkedlist.prototype.get = function (position) {
+      if (position < 0 || position >= this.length) return null
+
+
+
+      var current = this.head
+      var index = 0
+
+
+      while (index++ < position) {
+        current = current.next
+      }
+      return current.data
+    }
+
+    DoublyLinkedlist.prototype.indexOf = function (data) {
+      var current = this.head
+      var index = 0
+
+      while (current) {
+        if (current.data == data) {
+          return index
+        }
+        current = current.next
+        index += 1
+      }
+      return -1
+    }
+
+    DoublyLinkedlist.prototype.update = function (position, newData) {
+      if (position < 0 || position >= this.length) return false
+
+      var current = this.head
+      var index = 0
+
+      while (index++ < position) {
+        current = current.next
+      }
+      current.data = newData
+
+      return true
+    }
+
+    DoublyLinkedlist.prototype.removeAt = function (position) {
+      if (position < 0 || position >= this.length) return null
+
+      var current = this.head
+      if (this.length === 1) {
+        this.head = null
+        this.tail = null
+      } else {
+        if (position == 0) {
+          this.head.next.prev = null
+          this.head = this.head.next
+        } else if (position == this.length - 1) {
+          this.tail.prev.next = null
+          this.tail = this.tail.prev
+        } else {
+          var index = 0
+
+          while (index++ < position) {
+            current = current.next
+          }
+          current.prev.next = current.next
+          current.next.prev = current.prev
+        }
+      }
+      this.length -= 1
+      return current.data
+    }
+
+    DoublyLinkedlist.prototype.remove = function (data) {
+      var index = this.indexOf(data)
+      return this.removeAt(index)
+    }
+  }
+  var double = new DoublyLinkedlist()
+  double.append('111')
+  double.append('222')
+  double.append('333')
+  console.log(double)
+  console.log(double.backwardString())
+</script>
+
+<body>
+
+</body>
+
+</html>
