@@ -1,0 +1,24 @@
+{
+  "name": "sjjg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "vuessr.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhouhaoyiu/data-structure-study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhouhaoyiu/data-structure-study/issues"
+  },
+  "homepage": "https://github.com/zhouhaoyiu/data-structure-study#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "vue": "^2.6.14",
+    "vue-server-renderer": "^2.6.14"
+  }
+}

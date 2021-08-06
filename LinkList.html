@@ -231,22 +231,22 @@
 
   //节流函数
   //n秒触发一次
-  // document.getElementById('button').onclick = thro(fn, 1000)
-  // function fn() {
-  //   console.log(123);
-  // }
-  // function thro(func, wait) {
-  //   let timerOut
-  //   return function () {
-  //     if (!timerOut) {
-  //       console.log(3423242332)
-  //       timerOut = setTimeout(function () {
-  //         func()
-  //         timerOut = null
-  //       }, wait)
-  //     }
-  //   }
-  // }
+  document.getElementById('button').onclick = thro(fn, 1000)
+  function fn() {
+    console.log(123);
+  }
+  function thro(func, wait) {
+    let timerOut
+    return function () {
+      if (!timerOut) {
+        console.log(3423242332)
+        timerOut = setTimeout(function () {
+          func()
+          timerOut = null
+        }, wait)
+      }
+    }
+  }
 
 </script>
 

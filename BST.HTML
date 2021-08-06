@@ -64,7 +64,39 @@
       }
 
       BinarySearchTree.prototype.midOrderTraversalNode = function (node, handler) {
+        if (node != null) {
+          this.midOrderTraversalNode(node.left, handler)
+          handler(node.key)
+          this.midOrderTraversalNode(node.right, handler)
+        }
+      }
 
+      BinarySearchTree.prototype.postOrderTraversal = function (handler) {
+        this.postOrderTraversalNode(this.root, handler)
+      }
+
+      BinarySearchTree.prototype.postOrderTraversalNode = function (node, handler) {
+        if (node != null) {
+          this.postOrderTraversalNode(node.left, handler)
+          this.postOrderTraversalNode(node.right, handler)
+          handler(node.key)
+        }
+      }
+
+      BinarySearchTree.prototype.max = function () {
+        var node = this.root
+        while (node != null) {
+          node = node.right
+        }
+        return node.key
+      }
+
+      BinarySearchTree.prototype.min = function () {
+        var node = this.root
+        while (node != null) {
+          node = node.left
+        }
+        return node.key
       }
     }
     var bst = new BinarySearchTree()
@@ -74,7 +106,19 @@
     bst.insert(3)
     bst.insert(7)
     bst.insert(15)
+    bst.insert(10)
     console.log(bst)
+    var result = ""
+    bst.preOrderTraversal(function (key) { result += key + ',' })
+    console.log(result)
+
+    var result = ""
+    bst.midOrderTraversal(function (key) { result += key + ',' })
+    console.log(result);
+
+    var result = ""
+    bst.postOrderTraversal(function (key) { result += key + ',' })
+    console.log(result);
 
     // let a = new Promise((resolve, reject) => {
     //   let num = Math.random() * 10
