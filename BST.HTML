@@ -85,18 +85,22 @@
 
       BinarySearchTree.prototype.max = function () {
         var node = this.root
+        var key = null
         while (node != null) {
+          key = node.key
           node = node.right
         }
-        return node.key
+        return key
       }
 
       BinarySearchTree.prototype.min = function () {
         var node = this.root
+        var key = null
         while (node != null) {
+          key = node.key
           node = node.left
         }
-        return node.key
+        return key
       }
     }
     var bst = new BinarySearchTree()
@@ -107,18 +111,9 @@
     bst.insert(7)
     bst.insert(15)
     bst.insert(10)
-    console.log(bst)
+    console.log(bst.max())
     var result = ""
-    bst.preOrderTraversal(function (key) { result += key + ',' })
-    console.log(result)
 
-    var result = ""
-    bst.midOrderTraversal(function (key) { result += key + ',' })
-    console.log(result);
-
-    var result = ""
-    bst.postOrderTraversal(function (key) { result += key + ',' })
-    console.log(result);
 
     // let a = new Promise((resolve, reject) => {
     //   let num = Math.random() * 10
