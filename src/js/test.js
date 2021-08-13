@@ -2,19 +2,23 @@ const patches = {
   0: [
     {
       type: 'ATTR',
-      attr: 'list-wrap'
+      attrs: {
+        class: 'list-wrap'
+      }
     }
   ],
   2: [
     {
       type: 'ATTR',
-      attr: 'title'
+      attrs: {
+        class: 'title'
+      }
     }
   ],
   3: [
     {
       type: 'TEXT',
-      text: '特殊列表'
+      text: '特殊列表项'
     }
   ],
   6: [
