@@ -100,15 +100,29 @@ class MVVM {
   //data数据代理，改变时候将dompool中的对应值改变
   initData() {
     const _this = this
-    this.data = new Proxy(this.data, {
-      get(target, key) {
-        return Reflect.get(target, key)
+    console.log(this.data)
+
+    Object.defineProperty(this.data, key, {
+      get() {
+        return _this.data[key]
       },
-      set(target, key, value) {
-        _this.domPool[key].innerHTML = value
-        return Reflect.set(target, key, value)
+      set(newValue) {
+        _this.domPool[key].innerHTML = newValue
       }
     })
+    // this.data = new Proxy(this.data, {
+    //   get(target, key) {
+    //     return Reflect.get(target, key)
+    //   },
+    //   set(target, key, value) {
+    //     // console.log(_this.domPool)
+    //     console.log(`target:`,target)
+    //     console.log('key',key)
+    //     console.log('v',value)
+    //     _this.domPool[key].innerHTML = value
+    //     return Reflect.set(target, key, value)
+    //   }
+    // })
   }
 
   //将dom中的{{}}中的值及其对应节点取出，放入dompool，并且值与data中对应key的值绑定
@@ -117,7 +131,6 @@ class MVVM {
     childNodes.forEach(item => {
       if (item.nodeType === 3) {
         const _value = item.nodeValue
-
         if (_value.trim().length) {
           let _isValid = /\{\{(.+?)\}\}/.test(_value)
           if (_isValid) {
