@@ -11,10 +11,32 @@
 <body>
 
   <script>
+    var b = new RegExp('[1-9][a-z][a-z]','g')
     var a = /[1-9][a-z][a-z]/g
     var str = '123kaLgf'
     // str.match(a)
+
+    //修饰符：i:忽略大小写  g:全局匹配 m：多行匹配  s:特殊字符圆点包含换行符/n
+
+    //元字符： 正则使用的转义字符
+    // \w = [0-9A-z_]
+    // \W = [^\w]与w互补
+
+    // \s [\r\n\t\v\f]
+    // \S
+
+    // \b 单词边界
+    // \B 非单词边界
+
+    // .匹配除了换行回车所有字符
+    console.log(str.match(b))
     console.log(str.match(a))
+
+    //量词： n+ 出现1-正无穷次
+
+    // n* 0-正无穷
+
+    // n？ 出现0-1次
   </script>
 </body>
 
