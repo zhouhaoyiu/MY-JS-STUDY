@@ -1,252 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function LinkedList() {
+      this.head = null;
+      this.length = 0;
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<script>
-  function LinkedList() {
-    this.head = null
-    this.length = 0
+      function Node(data) {
+        this.data = data;
+        this.next = null;
+      }
+      LinkedList.prototype.append = function (data) {
+        if (this.length == 0) {
+          var newNode = new Node(data);
+          this.head = newNode;
+        } else {
+          var newNode = new Node(data);
 
-    function Node(data) {
-      this.data = data
-      this.next = null
-    }
-    LinkedList.prototype.append = function (data) {
-      if (this.length == 0) {
-        var newNode = new Node(data)
-        this.head = newNode
-      }
-      else {
-        var newNode = new Node(data)
-
-        var current = this.head
-        while (current.next) {
-          current = current.next
-        }
-        current.next = newNode
-      }
-      this.length += 1
-    }
-
-    LinkedList.prototype.toString = function () {
-      // 1.定义变量
-      var current = this.head
-      var listString = ''
-      while (current) {
-        listString += current.data + ' '
-        current = current.next
-      }
-      return listString
-    }
-
-    LinkedList.prototype.insert = function (position, data) {
-      if (position < 0 || position > this.length) {
-        return false
-      }
-
-      var newNode = new Node(data)
-      if (position == 0) {
-        newNode.next = this.head
-        this.head = newNode
-      } else {
-        var index = 0
-        var current = this.head
-        var previous = null
-
-        while (index++ < position) {
-          previous = current
-          current = current.next
-        }
-
-        newNode.next = current
-        previous.next = newNode
-      }
-      this.length += 1
-      return true
-    }
-    LinkedList.prototype.get = function (position) {
-      if (position < 0 || position > this.length) return null
-
-      var current = this.head
-      var index = 0
-      while (index < position) {
-        current = current.next
-        index += 1
-      }
-      return current.data
-    }
-    LinkedList.prototype.indexOf = function (data) {
-      var current = this.head
-      var index = 0
-      while (current) {
-        if (current.data === data) {
-          return index
-        }
-        current = current.next
-        index += 1
-      }
-      return -1
-    }
-    LinkedList.prototype.update = function (position, newData) {
-      if (position < 0 || position > this.length) return false
-      var current = this.head
-      var index = 0
-      while (index < position) {
-        current = current.next
-        index += 1
-      }
-      current.data = newData
-      return true
-    }
-    LinkedList.prototype.removeAt = function (position) {
-      if (position < 0 || position >= this.length) return false
-
-      if (position == 0) {
-        this.head = this.head.next
-      }
-      else {
-        var index = 0
-        var current = this.head
-        var previous = null
-        while (index++ < position) {
-          previous = current
-          current = current.next
-        }
-        previous.next = current.next
-      }
-      this.length -=1
-
-      return current.data
-    }
-    LinkedList.prototype.remove = function(data){
-      var position = this.indexOf(data)
-      return this.removeAt(position)
-    }
-  }
-
-  var list = new LinkedList()
-  list.append('111')
-  list.append('222')
-  list.append('333')
-  console.log(list.indexOf('333'))
-  function Linked() {
-    this.length = 0
-    this.head = null
-
-    function Node(data) {
-      this.data = data
-      this.next = null
-    }
-    Linked.prototype.append = function (data) {
-      if (this.length === 0) {
-        var newNode = new Node(data)
-        this.head = newNode
-      }
-      else {
-        var newNode = new Node(data)
-        var current = this.head
-        while (current.next) {
-          current = current.next
-        }
-        current.next = newNode
-      }
-      this.length += 1
-    }
-    Linked.prototype.toString = function () {
-      var current = this.head
-      var myString = ''
-      while (current) {
-        myString += current.data + ' '
-        current = current.next
-      }
-      return myString
-    }
-    Linked.prototype.insert = function (position, data) {
-      if (position < 0 || position > this.length) {
-        return false
-      }
-      else {
-        var newNode = new Node(data)
-        if (position == 0) {
-          newNode.next = this.head
-          this.head = newNode
-        }
-        else {
-          var index = 0
-          var previous = null
-          var current = this.head
-          while (index++ < position) {
-            previous = current
-            current = current.next
+          var current = this.head;
+          while (current.next) {
+            current = current.next;
           }
-          previous.next = newNode
-          newNode.next = current
+          current.next = newNode;
         }
-        this.length += 1
-        return true
+        this.length += 1;
+      };
+
+      LinkedList.prototype.toString = function () {
+        // 1.定义变量
+        var current = this.head;
+        var listString = "";
+        while (current) {
+          listString += current.data + " ";
+          current = current.next;
+        }
+        return listString;
+      };
+
+      LinkedList.prototype.insert = function (position, data) {
+        if (position < 0 || position > this.length) {
+          return false;
+        }
+
+        var newNode = new Node(data);
+        if (position == 0) {
+          newNode.next = this.head;
+          this.head = newNode;
+        } else {
+          var index = 0;
+          var current = this.head;
+          var previous = null;
+
+          while (index++ < position) {
+            previous = current;
+            current = current.next;
+          }
+
+          newNode.next = current;
+          previous.next = newNode;
+        }
+        this.length += 1;
+        return true;
+      };
+      LinkedList.prototype.get = function (position) {
+        if (position < 0 || position > this.length) return null;
+
+        var current = this.head;
+        var index = 0;
+        while (index < position) {
+          current = current.next;
+          index += 1;
+        }
+        return current.data;
+      };
+      LinkedList.prototype.indexOf = function (data) {
+        var current = this.head;
+        var index = 0;
+        while (current) {
+          if (current.data === data) {
+            return index;
+          }
+          current = current.next;
+          index += 1;
+        }
+        return -1;
+      };
+      LinkedList.prototype.update = function (position, newData) {
+        if (position < 0 || position > this.length) return false;
+        var current = this.head;
+        var index = 0;
+        while (index < position) {
+          current = current.next;
+          index += 1;
+        }
+        current.data = newData;
+        return true;
+      };
+      LinkedList.prototype.removeAt = function (position) {
+        if (position < 0 || position >= this.length) return false;
+
+        if (position == 0) {
+          this.head = this.head.next;
+        } else {
+          var index = 0;
+          var current = this.head;
+          var previous = null;
+          while (index++ < position) {
+            previous = current;
+            current = current.next;
+          }
+          previous.next = current.next;
+        }
+        this.length -= 1;
+
+        return current.data;
+      };
+      LinkedList.prototype.remove = function (data) {
+        var position = this.indexOf(data);
+        return this.removeAt(position);
+      };
+      LinkedList.prototype.reverse = function () {
+        var current = this.head;
+        var previous = null;
+        var next = null;
+        while (current) {
+          console.log("cur", current);
+          next = current.next;
+
+          console.log("cur.next", current.next);
+          current.next = previous;
+
+          console.log("prev", previous);
+          previous = current;
+          current = next;
+          console.log("--------------------");
+        }
+        this.head = previous;
+      };
+      LinkedList.prototype.reverseList = function () {
+        return this.recu(this.head, null);
+      };
+      LinkedList.prototype.recu = function (current, previous) {
+        if (!current) return previous;
+        var next = current.next;
+        current.next = previous;
+        return this.recu(next, current);
+      };
+      LinkedList.prototype.reverse2 = function () {
+        const result = new LinkedList();
+        const temptemp = [];
+
+        let current = this.head;
+        while (current) {  
+          temptemp.push(current.data);
+          current = current.next;
+        }
+        for (let i = temptemp.length - 1; i >= 0; i--) {
+          result.append(temptemp[i]);
+        }
+        return result;
       }
+
     }
-  }
-  var lis = new Linked()
-  lis.insert(0, '111')
-  lis.insert(1, '222')
-  lis.insert(2, '333')
-  console.log(lis)
 
-</script>
+    var list = new LinkedList();
+    list.append("111");
+    list.append("222");
+    list.append("333");
+    list.append("444");
+    list.append("555");
+    list.append("666");
+    list.append("555");
+    list.append("444");
+    list.append("333");
 
-<body>
-  <input id="input">
-  <button id="button">DJ</button>
-</body>
-<script>
-  // var input = document.getElementById('input')
-  /**
-   * 防抖函数
-   * 执行后 n秒触发
-   * * 
-  */ function debounce(delay, callback) {
-     let timer
-     return function (value) {
-       clearTimeout(timer)
-       timer = setTimeout(function () {
-         callback(value)
-       }, delay);
-     }
-   }
- 
-   function fn(value) {
-     console.log(value)
-   }
-   var debounceFunc = debounce(1000, fn)
-   input.addEventListener('keyup', function (e) {
-     debounceFunc(e.target.value)
-   })
-   
+    // console.log(list.reverse2());
+    function reverse(head) {
+      if (!head || !head.next) return head;
+      const result = reverse(head.next);
+      head.next.next = head;
+      head.next = null;
+      return result;
+    }
+    function Linked() {
+      this.length = 0;
+      this.head = null;
 
-  //节流函数
-  //n秒触发一次
-  document.getElementById('button').onclick = thro(fn, 1000)
-  function fn() {
-    console.log(123);
-  }
-  function thro(func, wait) {
-    let timerOut
-    return function () {
-      if (!timerOut) {
-        timerOut = setTimeout(function () {
-          func()
-          timerOut = null
-        }, wait)
+      function Node(data) {
+        this.data = data;
+        this.next = null;
       }
+      Linked.prototype.append = function (data) {
+        if (this.length === 0) {
+          var newNode = new Node(data);
+          this.head = newNode;
+        } else {
+          var newNode = new Node(data);
+          var current = this.head;
+          while (current.next) {
+            current = current.next;
+          }
+          current.next = newNode;
+        }
+        this.length += 1;
+      };
+      Linked.prototype.toString = function () {
+        var current = this.head;
+        var myString = "";
+        while (current) {
+          myString += current.data + " ";
+          current = current.next;
+        }
+        return myString;
+      };
+      Linked.prototype.insert = function (position, data) {
+        if (position < 0 || position > this.length) {
+          return false;
+        } else {
+          var newNode = new Node(data);
+          if (position == 0) {
+            newNode.next = this.head;
+            this.head = newNode;
+          } else {
+            var index = 0;
+            var previous = null;
+            var current = this.head;
+            while (index++ < position) {
+              previous = current;
+              current = current.next;
+            }
+            previous.next = newNode;
+            newNode.next = current;
+          }
+          this.length += 1;
+          return true;
+        }
+      };
     }
-  }
+    var lis = new Linked();
+    lis.insert(0, "111");
+    lis.insert(1, "222");
+    lis.insert(2, "333");
+    // console.log(lis);
+  </script>
 
-</script>
+  <body>
+    <input id="input" />
+    <button id="button">114514</button>
+  </body>
+  <script>
+    // var input = document.getElementById('input')
+    /**
+     * 防抖函数
+     * 执行后 n秒触发
+     * *
+     */
+    function debounce(delay, callback) {
+      let timer;
+      return function (value) {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          callback(value);
+        }, delay);
+      };
+    }
 
+    function fn(value) {
+      console.log(value);
+    }
+    var debounceFunc = debounce(1000, fn);
+    input.addEventListener("keyup", function (e) {
+      debounceFunc(e.target.value);
+    });
+
+    //节流函数
+    //n秒触发一次
+    document.getElementById("button").onclick = thro(fn, 1000);
+
+    function fn() {
+      console.log(123);
+    }
+
+    function thro(func, wait) {
+      let timerOut;
+      return function () {
+        if (!timerOut) {
+          timerOut = setTimeout(function () {
+            func();
+            timerOut = null;
+          }, wait);
+        }
+      };
+    }
+  </script>
 </html>
