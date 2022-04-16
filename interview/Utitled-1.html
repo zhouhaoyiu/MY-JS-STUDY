@@ -1,77 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
 
-<head>
-  <title></title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/style.css" rel="stylesheet">
-</head>
+  <body>
+    <script>
+      // instanceof
+      // Person.prototype.myname = '2'
+      // function Person(name) {
+      //   this.name = name
+      // }
+      // person = new Person()
+      // // Person.prototype.name = '1'
+      // Person.prototype = {
+      //   myname:'1'
+      // }
+      // console.log(person.__proto__);
+      // // console.log(person.__proto__.constructor.myname)
+      // // console.log(person.__proto__.constructor.prototype.myname)
+      // console.log(Person.prototype)
 
-<body>
-  <script>
-    // instanceof
-    // Person.prototype.myname = '2'
-    // function Person(name) {
-    //   this.name = name
-    // }
-    // person = new Person()
-    // // Person.prototype.name = '1'
-    // Person.prototype = {
-    //   myname:'1'
-    // }
-    // console.log(person.__proto__);
-    // // console.log(person.__proto__.constructor.myname)
-    // // console.log(person.__proto__.constructor.prototype.myname)
-    // console.log(Person.prototype)
-
-    let res = []
-    let arr = [[0], [2, 3, 4], 1, [1, [2, 3]]]
-    function Bpn(arr) {
-      for (let i of arr) {
-        // console.log(i);
-        if (i instanceof Array) {
-          Bpn(i)
-        }
-        else {          
-          res.push(i)
+      let res = [];
+      let arr = [[0], [2, 3, 4], 1, [1, [2, 3]]];
+      function Bpn(arr) {
+        for (let i of arr) {
+          // console.log(i);
+          if (i instanceof Array) {
+            Bpn(i);
+          } else {
+            res.push(i);
+          }
         }
       }
-    }
-    Bpn(arr)
-    console.log(res);
-    console.log(arr.flat(Infinity))
+      Bpn(arr);
+      console.log(res);
+      console.log(arr.flat(Infinity));
 
-    const res2 = JSON.stringify(arr).replace(/\[|\]/g, '')
-    console.log(res2.split(','));
+      const res2 = JSON.stringify(arr).replace(/\[|\]/g, "");
+      console.log(res2.split(","));
 
-    const res3 = JSON.parse('[' + res2 + ']')
+      const res3 = JSON.parse("[" + res2 + "]");
 
-    const res4 = arr.reduce((pre, cur) => { return pre + cur })
-    console.log(res4)
-    const newArr = (arr) => {
-      return arr.reduce((pre, cur) => {
-        return pre.concat(Array.isArray(cur) ? newArr(cur) : cur)
-      }, [])
-    }
-    console.log(newArr(arr))
+      const res4 = arr.reduce((pre, cur) => {
+        return pre + cur;
+      });
+      console.log(res4);
+      const newArr = (arr) => {
+        return arr.reduce((pre, cur) => {
+          return pre.concat(Array.isArray(cur) ? newArr(cur) : cur);
+        }, []);
+      };
+      console.log(newArr(arr));
 
-    let arr1 = ['ss','ssdssa','ss','ffbf']
-    console.log(arr1.reduce((pre,cur)=>{
-      console.log(pre)
-      console.log(cur)
-      if(cur in pre){
-        pre[cur] ++
-      }else{
-        pre[cur] = 1
-      }
-      return pre
-    },{}));
+      let arr1 = ["ss", "ssdssa", "ss", "ffbf"];
+      console.log(
+        arr1.reduce((pre, cur) => {
+          // console.log(pre);
+          // console.log(cur);
+          if (cur in pre) {
+            pre[cur]++;
+          } else {
+            pre[cur] = 1;
+          }
+          return pre;
+        }, {})
+      );
 
-    let obj = {}
-    obj['a'] = 1
-    console.log(obj)
-  </script>
-</body>
-
+      let obj = {};
+      obj["a"] = 1;
+      console.log(obj);
+    </script>
+  </body>
 </html>
